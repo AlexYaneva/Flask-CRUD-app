@@ -1,0 +1,9 @@
+- In Flask, handlers for the application routes are written as Python functions, called view functions. View functions are mapped to one or more route URLs so that Flask knows what logic to execute when a client requests a given URL.
+
+- @decorators: A common pattern with decorators is to use them to register functions as callbacks for certain events
+
+- always check what directory you're in with the command prompt
+
+- Flask allows you to register environment variables that you want to be automatically imported when you run the flask command. Use this option with the python-dotenv package: create a .flaskenv file in your root folder and add the FLASK_APP env variable in it
+
+- Placeholders for the dynamic content are enclosed in {{ ... }} sections. These placeholders represent the parts of the page that are variable and will only be known at runtime. The Jinja2 template engine substitutes {{ ... }} blocks with the corresponding values, given by the arguments provided in the render_template() call.
