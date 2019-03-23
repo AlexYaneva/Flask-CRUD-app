@@ -2,8 +2,12 @@
 
 - @decorators: A common pattern with decorators is to use them to register functions as callbacks for certain events
 
-- always check what directory you're in with the command prompt
+- !! Always check what directory you're in with the command prompt !!
 
 - Flask allows you to register environment variables that you want to be automatically imported when you run the flask command. Use this option with the python-dotenv package: create a .flaskenv file in your root folder and add the FLASK_APP env variable in it
 
 - Placeholders for the dynamic content are enclosed in {{ ... }} sections. These placeholders represent the parts of the page that are variable and will only be known at runtime. The Jinja2 template engine substitutes {{ ... }} blocks with the corresponding values, given by the arguments provided in the render_template() call.
+
+- Coonfiguration: best practice is to use a class in a separate file for your configuration settings. As the app grows, you can add more configuration settings to this class
+
+- The form.hidden_tag() template argument (check /forms.py) generates a hidden field that includes a token that is used to protect the form against CSRF attacks. All you need to do to have the form protected is include this hidden field and have the SECRET_KEY variable defined in the Flask configuration. If you take care of these two things, Flask-WTF does the rest for you.
