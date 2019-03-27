@@ -17,3 +17,7 @@
 - The ORM layer within SQLAlchemy will do the translations required to map objects created from the database models (classes) into rows in the proper database tables.
 
 - Each time any changes have been made to the database models, you need to do a db migration (flask db migrate) and then apply them to the database with 'flask db upgrade'
+
+- Flask-Login keeps track of the logged in user by storing its unique identifier in Flask's user session, a storage space assigned to each user who connects to the application.
+
+------------------------------- my sample username: Sasha; password: Sashka555, email: sasha@me.com
