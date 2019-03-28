@@ -10,7 +10,7 @@
 
 - Coonfiguration: best practice is to use a class in a separate file for your configuration settings. As the app grows, you can add more configuration settings to this class
 
-- The form.hidden_tag() template argument (check /forms.py) generates a hidden field that includes a token that is used to protect the form against CSRF attacks. All you need to do to have the form protected is include this hidden field and have the SECRET_KEY variable defined in the Flask configuration. If you take care of these two things, Flask-WTF does the rest for you.
+- The form.hidden_tag() template argument (check /register.html) generates a hidden field that includes a token that is used to protect the form against CSRF attacks. All you need to do to have the form protected is include this hidden field and have the SECRET_KEY variable defined in the Flask configuration. If you take care of these two things, Flask-WTF does the rest for you.
 
 - Flask-SQLAlchemy is a popular flask extension, it is an Object Relational Mapper or ORM. ORMs allow applications to manage a database using high-level entities such as classes, objects and methods instead of tables and SQL. The job of the ORM is to translate the high-level operations into database commands. SQLAlchemy supports a long list of database engines, including the popular MySQL, PostgreSQL and SQLite.
 

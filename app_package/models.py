@@ -6,8 +6,12 @@ from app_package import login
 
 #Here, i am basically defining my models for my database tables, the data fields and the data types (varchar, integer etc.)
 
-class User(UserMixin, db.Model): #db.Model is a base class for all models from flask-sqlalchemy
-    #UserMixin class includes generic implementations that are appropriate for most user model classes.
+
+class User(UserMixin, db.Model): 
+	''' db.Model is a base class for all models from flask-sqlalchemy
+    UserMixin class includes generic implementations that are appropriate 
+    for most user model classes( is_authenticated, is_active etc.)'''
+
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(64), index=True, unique=True)
 	email = db.Column(db.String(120), index=True, unique=True)
@@ -23,7 +27,11 @@ class User(UserMixin, db.Model): #db.Model is a base class for all models from f
 	def check_password(self, password):
 		return check_password_hash(self.password_hash, password)
 
+
+
 class Post(db.Model):
+	''' table for blog posts '''
+
 	id = db.Column(db.Integer, primary_key=True)
 	body = db.Column(db.String(140))
 	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -34,7 +42,7 @@ class Post(db.Model):
 
 
 # The flask-login extension expects that the application will configure a user loader function, 
-# that can be called to load a user given the ID:
+# which can be called to load a user given the ID:
 @login.user_loader
 def load_user(id):
 	return User.query.get(int(id))

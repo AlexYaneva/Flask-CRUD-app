@@ -1,4 +1,4 @@
-#Home page route
+
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app_package import app, db
@@ -6,11 +6,15 @@ from app_package.forms import LoginForm, RegistrationForm
 from app_package.models import User
 from werkzeug.urls import url_parse
 
+
+''' All of these functions are called view functions - they are mapped to one or more URL routes.
+    This is how Flask knows which locig to execute. '''
+
 @app.route('/')
+
 @app.route('/index')
 @login_required #this means the /index page won't be displayed unless the user logs in first
 def index():
-	user = {'username': 'Sasha'}
 	posts = [
 	{
 	'author':{'username':'John'}, 
@@ -21,6 +25,7 @@ def index():
 	'body':'The Avengers movie was great!'}]
 
 	return render_template('index.html', title='Home', posts=posts)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

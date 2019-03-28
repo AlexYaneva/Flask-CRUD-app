@@ -8,14 +8,18 @@ class LoginForm(FlaskForm):
 	for a username and psw and has the 'remember me'
 	option'''
 
-	username = StringField('Username', validators=[DataRequired()]) #the datarequired validator checks that the field is not submitted empty
+	username = StringField('Username', validators=[DataRequired()]) #the DataRequired() validator checks that the field is not submitted empty
 	password = PasswordField('Password',validators=[DataRequired()])
 	remember_me = BooleanField('Remember me')
 	submit = SubmitField('Sign in')
 
 
 
+
 class RegistrationForm(FlaskForm):
+	''' somewhat self-explanatory registration form
+	following similar logic as the LoginForm '''
+
 	username = StringField('Username', validators=[DataRequired()])
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	password = PasswordField('Password', validators=[DataRequired()])
