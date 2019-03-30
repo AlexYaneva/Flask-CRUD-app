@@ -3,8 +3,10 @@ from datetime import datetime
 from app_package import db
 from flask_login import UserMixin
 from app_package import login
+from hashlib import md5
 
-#Here, i am basically defining my models for my database tables, the data fields and the data types (varchar, integer etc.)
+# Here, i am basically defining my models for my database tables, the data fields and the data types (varchar, integer etc.). 
+# So far, I've got 2 tables in the db - User and Post
 
 
 class User(UserMixin, db.Model): 
@@ -17,6 +19,9 @@ class User(UserMixin, db.Model):
 	email = db.Column(db.String(120), index=True, unique=True)
 	password_hash = db.Column(db.String(128))
 	posts = db.relationship('Post', backref='author', lazy='dynamic') #only need to define this field here for the one-to-many relationship (one user, multiple posts)
+	about_me = db.Column(db.String(140))
+	last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 	def __repr__(self):
 		return f'<User {self.username}>'
@@ -26,6 +31,10 @@ class User(UserMixin, db.Model):
 
 	def check_password(self, password):
 		return check_password_hash(self.password_hash, password)
+
+	def avatar(self, size):
+		digest = md5(self.email.lower().encode('utf-8')).hexdigest() #encoding the string as bytes and then passing it to the hash function
+		return f'https://gravatar.com/avatar/{digest}?d=identicon&s={size}' #the 'identicon' part is added to generate a default avatar for users who don't have one
 
 
 

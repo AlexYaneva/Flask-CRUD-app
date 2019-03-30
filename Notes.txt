@@ -16,8 +16,10 @@
 
 - The ORM layer within SQLAlchemy will do the translations required to map objects created from the database models (classes) into rows in the proper database tables.
 
-- Each time any changes have been made to the database models, you need to do a db migration (flask db migrate) and then apply them to the database with 'flask db upgrade'
+- Each time any changes have been made to the database models, you need to do a db migration (flask db migrate) and then apply them to the database with 'flask db upgrade'. It is very useful to work with a migration framework. Any users that were in the database are still there, the migration framework surgically applies the changes in the migration script without destroying any data.
 
 - Flask-Login keeps track of the logged in user by storing its unique identifier in Flask's user session, a storage space assigned to each user who connects to the application.
 
 ------------------------------- my sample username: Sasha; password: Sashka555, email: sasha@me.com
+
+- The _ prefix in a template's name is just a naming convention to help me recognize which template files are sub-templates.

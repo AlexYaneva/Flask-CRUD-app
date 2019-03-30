@@ -2,13 +2,24 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app_package import app, db
-from app_package.forms import LoginForm, RegistrationForm
+from app_package.forms import LoginForm, RegistrationForm, EditProfileForm
 from app_package.models import User
 from werkzeug.urls import url_parse
+from datetime import datetime
+
 
 
 ''' All of these functions are called view functions - they are mapped to one or more URL routes.
     This is how Flask knows which locig to execute. '''
+
+
+
+@app.before_request  # this records the last time a user was logged in
+def before_request():
+	if current_user.is_authenticated:
+		current_user.last_seen = datetime.utcnow()
+		db.session.commit()
+
 
 @app.route('/')
 
@@ -75,3 +86,21 @@ def user(username):
 			{'author': user, 'body': 'Test post'},
 			{'author': user, 'body': 'Test post 2'}]
 	return render_template('user.html', user=user, posts=posts)
+
+
+
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+	form = EditProfileForm()
+	if form.validate_on_submit():
+		current_user.username = form.username.data
+		current_user.about_me = form.about_me.data
+		db.session.commit()
+		flash('Your changes have been saved!')
+		return redirect(url_for('edit_profile'))
+	elif request.method == 'GET':
+		form.username.data = current_user.username
+		form.about_me.data = current_user.about_me
+	return render_template('edit_profile.html', title='Edit Profile', form=form)
