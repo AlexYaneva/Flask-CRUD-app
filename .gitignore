@@ -4,3 +4,4 @@
 *$py.class
 *env/
 *.db
+logs/
