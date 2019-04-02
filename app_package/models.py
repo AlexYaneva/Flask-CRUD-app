@@ -5,8 +5,17 @@ from flask_login import UserMixin
 from app_package import login
 from hashlib import md5
 
-# Here, i am basically defining my models for my database tables, the data fields and the data types (varchar, integer etc.). 
-# So far, I've got 2 tables in the db - User and Post
+''' Here, i am basically defining my models for my database tables, 
+    the data fields and the data types (varchar, integer etc.). 
+    So far, I've got 3 tables in the db - User, Post and followers '''
+
+
+
+#this is an auxiliary table and has no data other than foreign keys, so I don't need a model class for it
+followers = db.Table('followers', 
+	db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+	db.Column('followed_id', db.Integer, db.ForeignKey('user.id')))
+
 
 
 class User(UserMixin, db.Model): 
@@ -21,6 +30,11 @@ class User(UserMixin, db.Model):
 	posts = db.relationship('Post', backref='author', lazy='dynamic') #only need to define this field here for the one-to-many relationship (one user, multiple posts)
 	about_me = db.Column(db.String(140))
 	last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+	followed = db.relationship('User', secondary=followers, #defining the followers table relationship; the .c. refers to the 'column' in the table
+		primaryjoin=(followers.c.follower_id == id),
+		secondaryjoin=(followers.c.followed_id == id),
+		backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
+		)
 
 
 	def __repr__(self):
@@ -35,6 +49,18 @@ class User(UserMixin, db.Model):
 	def avatar(self, size):
 		digest = md5(self.email.lower().encode('utf-8')).hexdigest() #encoding the string as bytes and then passing it to the hash function
 		return f'https://gravatar.com/avatar/{digest}?d=identicon&s={size}' #the 'identicon' part is added to generate a default avatar for users who don't have one
+
+
+	def follow(self, user):
+		if not self.is_following(user):
+			self.followed.append(user)
+
+	def unfollow(self, user):
+		if self.is_following(user):
+			self.followed.remove(user)
+
+	def is_following(self, user):
+		return self.followed.filter(followers.c.followed.id == user.id).count() > 0
 
 
 
@@ -55,3 +81,8 @@ class Post(db.Model):
 @login.user_loader
 def load_user(id):
 	return User.query.get(int(id))
+
+
+#this is an auxiliary table and has no data other than foreign keys, so I don't need a model class for it
+
+
