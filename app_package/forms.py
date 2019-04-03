@@ -3,11 +3,12 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextA
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app_package.models import User
 
+
+
 class LoginForm(FlaskForm):
 	'''user login form, which asks the user 
 	for a username and psw and has the 'remember me'
 	option'''
-
 	username = StringField('Username', validators=[DataRequired()]) #the DataRequired() validator checks that the field is not submitted empty
 	password = PasswordField('Password',validators=[DataRequired()])
 	remember_me = BooleanField('Remember me')
@@ -19,7 +20,6 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
 	''' somewhat self-explanatory registration form
 	following similar logic as the LoginForm '''
-
 	username = StringField('Username', validators=[DataRequired()])
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	password = PasswordField('Password', validators=[DataRequired()])
@@ -38,6 +38,7 @@ class RegistrationForm(FlaskForm):
 			raise ValidationError('Please use a different email address.')
 
 
+
 class EditProfileForm(FlaskForm):
 
 	username = StringField('Username', validators=[DataRequired()])
@@ -53,3 +54,12 @@ class EditProfileForm(FlaskForm):
 			user = User.query.filter_by(username=self.username.data).first()
 			if user is not None:
 				raise ValidationError('Please use a different username.')
+
+
+
+class PostForm(FlaskForm):
+
+	post = TextAreaField('Share your thoughts', validators=[DataRequired(), Length(min=1, max=140)])
+	submit = SubmitField('Submit')
+
+	
