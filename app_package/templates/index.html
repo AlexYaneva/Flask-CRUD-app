@@ -6,6 +6,7 @@
 {% block content %}    <!-- the name of this block statement is 'content' -->
 
 	<h1>Hi, {{ current_user.username }}!</h1>
+	{% if form %} <!-- adding a conditional to check if the form exists and needs to be rendered (for example, it does not for the 'explore' page) -->
 	<form action="", method='post'>
 		{{ form.hidden_tag() }}
 		<p>
@@ -17,10 +18,10 @@
 		</p>
 		<p>{{ form.submit() }}</p>
 	</form>
+	{% endif %}
 
 	{% for post in posts %}
-	<p>{{ post.author.username }} says: <b>{{ post.body }}</b>
-	</p>
+		{% include '_post.html' %}
 	{% endfor %}
 
 {% endblock %}
