@@ -2,8 +2,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from app_package import db
 from flask_login import UserMixin
-from app_package import login
+from app_package import app, db, login
 from hashlib import md5
+from time import time
+import jwt
 
 ''' Here, i am basically defining my models for my database tables, 
     the data fields and the data types (varchar, integer etc.). 
@@ -68,6 +70,19 @@ class User(UserMixin, db.Model):
 				followers.c.follower_id == self.id)
 		own = Post.query.filter_by(user_id=self.id) #user's own posts
 		return followed.union(own).order_by(Post.timestamp.desc())
+
+	def get_reset_password_token(self, expires_in=600):
+		return jwt.encode(
+			{'reset_password': self.id, 'exp': time() + expires_in},
+			app.config['SECRET_KEY'], algorithm = 'HS256').decode('utf-8')
+
+	@staticmethod #static methods can be invoked directly from the class
+	def verify_reset_password_token(token):
+		try:
+			id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+		except:
+			return
+		return User.query.get(id)
 
 
 

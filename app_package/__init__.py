@@ -1,11 +1,15 @@
-from flask import Flask
-from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_login import LoginManager
+from flask_mail import Mail
+from config import Config
+
+
+# I am creating an instance for every new flask extension right after the flask app is created:
 
 
 app = Flask(__name__)
@@ -15,6 +19,7 @@ migrate = Migrate(app, db) #doing the same here as above
 login = LoginManager(app)
 login.login_view = 'login' #The 'login' value above is the function (or endpoint) name for the login view. 
 #In other words, the name you would use in a url_for() call to get the URL.
+mail = Mail(app)
 
 
 #only enabling the logger if the app is running without debug mode:
