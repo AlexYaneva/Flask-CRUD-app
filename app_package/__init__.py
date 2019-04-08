@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_bootstrap import Bootstrap
 from config import Config
 
 
@@ -20,6 +21,7 @@ login = LoginManager(app)
 login.login_view = 'login' #The 'login' value above is the function (or endpoint) name for the login view. 
 #In other words, the name you would use in a url_for() call to get the URL.
 mail = Mail(app)
+bootstrap = Bootstrap(app)
 
 
 #only enabling the logger if the app is running without debug mode:

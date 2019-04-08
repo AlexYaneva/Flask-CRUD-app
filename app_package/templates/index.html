@@ -3,7 +3,7 @@
 
 {% extends "base.html" %}
 
-{% block content %}    <!-- the name of this block statement is 'content' -->
+{% block app_content %}    <!-- the name of this block statement is 'content' -->
 
 	<h1>Hi, {{ current_user.username }}!</h1>
 	{% if form %} <!-- adding a conditional to check if the form exists and needs to be rendered (for example, it does not for the 'explore' page) -->
