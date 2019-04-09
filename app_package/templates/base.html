@@ -51,3 +51,10 @@
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}
+
+<!-- Including the moment.js library to ensure it is available in all other templates. 
+The super() statement preserves the content in the base template, without it any content in this block would be lost-->
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
