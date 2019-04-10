@@ -2,15 +2,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from app_package import db
 from flask_login import UserMixin
-from app_package import app, db, login
+from app_package import db, login
 from hashlib import md5
 from time import time
 import jwt
 
-''' Here, i am basically defining my models for my database tables, 
-    the data fields and the data types (varchar, integer etc.). 
-    So far, I've got 3 tables in the db - User, Post and followers '''
-
+''' 
+Defining models for the database tables, 
+the fields and the data types (varchar, integer etc.). 
+So far, I've got 3 tables in the db - User, Post and followers 
+'''
 
 
 #this is an auxiliary table and has no data other than foreign keys, so I don't need a model class for it
@@ -21,9 +22,11 @@ followers = db.Table('followers',
 
 
 class User(UserMixin, db.Model): 
-	''' db.Model is a base class for all models from flask-sqlalchemy
+	''' 
+	db.Model is a base class for all models from flask-sqlalchemy
     UserMixin class includes generic implementations that are appropriate 
-    for most user model classes( is_authenticated, is_active etc.)'''
+    for most user model classes( is_authenticated, is_active etc.)
+    '''
 
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(64), index=True, unique=True)
@@ -74,12 +77,12 @@ class User(UserMixin, db.Model):
 	def get_reset_password_token(self, expires_in=600):
 		return jwt.encode(
 			{'reset_password': self.id, 'exp': time() + expires_in},
-			app.config['SECRET_KEY'], algorithm = 'HS256').decode('utf-8')
+			current_app.config['SECRET_KEY'], algorithm = 'HS256').decode('utf-8')
 
 	@staticmethod #static methods can be invoked directly from the class
 	def verify_reset_password_token(token):
 		try:
-			id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+			id = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
 		except:
 			return
 		return User.query.get(id)

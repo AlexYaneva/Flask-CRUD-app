@@ -8,6 +8,8 @@ from app_package.auth.email import send_password_reset_email
 from werkzeug.urls import url_parse
 
 
+
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated: #current_user variable can be used at any time to obtain the user object that represents the request 
@@ -28,7 +30,7 @@ def login():
 	
 
 @bp.route('/logout')
-deflogout():
+def logout():
 	logout_user()
 	return redirect(url_for('main.index'))
 

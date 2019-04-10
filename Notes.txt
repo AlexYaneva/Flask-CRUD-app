@@ -29,3 +29,5 @@
 - The password reset links will have a secure token in them. To generate these tokens, we're using JSON Web Tokens.
 
 - To start a local email server: '(venv) $ python -m smtpd -n -c DebuggingServer localhost:8025' in a second cmd
+
+- The current_app variable that Flask provides is a special "context" variable that Flask initializes with the application before it dispatches a request. It works like a global variable, but is only accessible during the handling of a request, and only in the thread that is handling it.
