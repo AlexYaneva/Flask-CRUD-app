@@ -20,8 +20,6 @@
 
 - Flask-Login keeps track of the logged in user by storing its unique identifier in Flask's user session, a storage space assigned to each user who connects to the application.
 
-------------------------------- my sample username: Sasha; password: Sashka666, email: sasha@me.com (and also User2, psw: User2isloco user2@example.com)
-
 - The _ prefix in a template's name is just a naming convention to help me recognize which template files are sub-templates.
 
 - It is always best to move the application logic away from view functions and into models or other auxiliary classes or modules, because that makes unit testing much easier.
