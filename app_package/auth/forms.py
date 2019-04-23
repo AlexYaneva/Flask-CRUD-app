@@ -7,7 +7,7 @@ from app_package.models import User
 
 class LoginForm(FlaskForm):
 
-	username = StringField('Username', validators=[DataRequired()]) #the DataRequired() validator checks that the field is not submitted empty
+	username = StringField('Username', validators=[DataRequired()])
 	password = PasswordField('Password',validators=[DataRequired()])
 	remember_me = BooleanField('Remember me')
 	submit = SubmitField('Sign in')

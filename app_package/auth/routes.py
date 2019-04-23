@@ -12,7 +12,7 @@ from werkzeug.urls import url_parse
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-	if current_user.is_authenticated: #current_user variable can be used at any time to obtain the user object that represents the request 
+	if current_user.is_authenticated: 
 		return redirect(url_for('main.index'))
 	form = LoginForm()
 	if form.validate_on_submit():
@@ -21,8 +21,12 @@ def login():
 			flash('Invalid username or password')
 			return redirect(url_for('auth.login'))
 		login_user(user, remember=form.remember_me.data)
-		next_page = request.args.get('next') #obtaining the value of 'next' i.e. which page the user wanted to see but was prompted to log in
-		if not next_page or url_parse(next_page).netloc != '': #the parse and netloc are security checks
+
+		# Storing the value of 'next' i.e. which page the user wanted to see but was prompted to log in first
+		next_page = request.args.get('next') 
+
+		# The parse and netloc are security checks
+		if not next_page or url_parse(next_page).netloc != '': 
 			next_page = url_for('main.index')
 		return redirect(next_page)
 	return render_template('auth/login.html', title='Sign In', form=form)
@@ -38,8 +42,10 @@ def logout():
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
+
+	# If the user is already logged in, there is no point using the password reset so I'm redirecting them to the index
 	if current_user.is_authenticated:
-		return redirect(url_for('main.index')) #if the user is already logged in, there is no point using the password reset so I redirect to the index
+		return redirect(url_for('main.index')) 
 	form = RegistrationForm()
 	if form.validate_on_submit():
 		user = User(username=form.username.data, email=form.email.data)

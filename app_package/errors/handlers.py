@@ -9,5 +9,7 @@ def not_found_error(error):
 
 @bp.app_errorhandler(500)
 def internal_error(error):
-	db.session.rollback() #as this could be a db error, it's safer to rollback to a clean state
+
+	# As this could be a db error, it's safer to rollback to a clean state
+	db.session.rollback() 
 	return render_template('errors/500.html'), 500

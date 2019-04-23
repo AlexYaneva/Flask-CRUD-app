@@ -11,13 +11,13 @@ from flask_moment import Moment
 from config import Config
 
 
-''' First, an instance for every flask extension is created. '''
 
+# Creating an instance for every extension
 
 db = SQLAlchemy() 
 migrate = Migrate()
 login = LoginManager()
-login.login_view = 'auth.login' #The 'login' value is the function name for the login view i.e. the name you would use in a url_for() call to get the URL.
+login.login_view = 'auth.login' # The 'login' value is the function name for the login view i.e. the name you would use in a url_for() call to get the URL.
 login.login_message = 'Please log in to access this page.' 
 mail = Mail()
 bootstrap = Bootstrap()
@@ -51,7 +51,7 @@ def create_app(config_class=Config):
 	app.register_blueprint(main_bp)
 
 
-    #setting up the logger and enabling it only if the app is running without debug mode or testing:
+    # Setting up the logger and enabling it only if the app is running without debug mode or testing:
 
 	if not app.debug and not app.testing:
 
