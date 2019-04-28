@@ -1,13 +1,29 @@
 {% extends "base.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Register</h1>
-    <div class="row">
-        <div class="col-md-4">
-            {{ wtf.quick_form(form) }}
+    <h1 class='text-center'>Register</h1>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-4">
+                <form  action="" method="post" role="form">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                    {{ form.username.label }}<br>
+                    {{ form.username(class='form-control', size=32, placeholder='Your username') }}<br>
+
+                    {{ form.email.label }}<br>
+                    {{ form.email(class=form-control', size=64, placeholder='Your email address')}}
+
+                    {{ form.password.label }}<br>
+                    {{ form.password(class='form-control', size=32, placeholder='Your password') }}<br>
+
+                    {{ form.password2.label }}<br>
+                    {{ form.password2(class='form-control', size=32, placeholder='Repeat password') }}<br>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
 {% endblock %}
 
 
