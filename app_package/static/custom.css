@@ -15,18 +15,25 @@ body {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-.alert-danger {
-	background-color: #ee5f5b;
-}
-
 .alert {
-	border: none;
-	color: #fff;
+	position: relative;
+	border: 1px solid transparent;
+  	border-radius: 0.25rem;
 	margin-top: 1rem;
 }
 
 .alert-dismissible {
 	padding-right: 3.90rem;
+}
+
+.alert-warning{
+   color: black;
+   background-color: pink;
+   border-color: #fde1b9;
+}
+
+.alert-danger {
+	background-color: #ee5f5b;
 }
 
 .btn {

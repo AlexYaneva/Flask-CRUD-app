@@ -10,9 +10,14 @@
 	            <div class="form-group">
 				{{ form.username.label }}<br>
 				{{ form.username(class='form-control', size=32, placeholder='Enter username here') }}<br>
+                {% for error in form.username.errors %}
+                    <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>{{ error }}</div>
+                {% endfor %}
 
 				{{ form.about_me.label }}<br>
 				{{ form.about_me(class='form-control', cols=50, rows=4) }}<br>
+				
 				<button type="submit" class="btn btn-primary">Submit</button>
 	      	
 				 </div>

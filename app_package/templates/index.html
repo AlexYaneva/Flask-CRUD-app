@@ -3,9 +3,9 @@
 
 {% block app_content %}   
 
-	<h1>Hi, {{ current_user.username }}!</h1>
+	<h1 class='text-center'>Hi, {{ current_user.username }}!</h1>
 	{% if form %} <!-- adding a conditional to check if the form exists and needs to be rendered (for example, it does not for the 'explore' page) -->
-	<div class="row align-items-start justify-content-start">
+	<div class="row align-items-center justify-content-center">
         <div class="col-md-4">
             <form  action="" method="post" role="form">
                 {{ form.hidden_tag() }}
@@ -23,7 +23,7 @@
 	{% for post in posts %}
 		{% include '_post.html' %}
 	{% endfor %}
-    
+
     <div>
       <ul class="pagination">
         <li class="page-item previous{% if not prev_url %} disabled{% endif %}">
