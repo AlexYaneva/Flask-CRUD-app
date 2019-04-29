@@ -2,7 +2,7 @@
 
 
 {% block app_content %}
-	<h1>Edit Profile</h1>
+	<h1 class='text-center'>Edit Profile</h1>
 	<div class="row align-items-center justify-content-center">
 	    <div class="col-md-4">
 	        <form  action="" method="post" role="form">
@@ -10,11 +10,11 @@
 	            <div class="form-group">
 				{{ form.username.label }}<br>
 				{{ form.username(class='form-control', size=32, placeholder='Enter username here') }}<br>
-				<!-- <input type="text" class="form-control" id="username" placeholder="Enter username here"> -->
 
 				{{ form.about_me.label }}<br>
 				{{ form.about_me(class='form-control', cols=50, rows=4) }}<br>
-	      		<!-- <textarea class="form-control" id="about me" rows="3"></textarea> -->
+				<button type="submit" class="btn btn-primary">Submit</button>
+	      	
 				 </div>
 			</form>
 	    </div>

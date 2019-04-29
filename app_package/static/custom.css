@@ -61,8 +61,3 @@ body {
   background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.6);
 }
-
-.page-item:first-child
-.page-link{
-	justify-content: left;
-}
