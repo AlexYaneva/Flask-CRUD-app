@@ -3,22 +3,22 @@
 
 {% block app_content %}   
 
-	<h1 class='text-center'>Hi, {{ current_user.username }}!</h1>
-	{% if form %} <!-- adding a conditional to check if the form exists and needs to be rendered (for example, it does not for the 'explore' page) -->
-	<div class="row align-items-center justify-content-center">
-        <div class="col-md-4">
-            <form  action="" method="post" role="form">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                {{ form.post.label }}<br>
-                {{ form.post(class='form-control', cols=32, rows=4, placeholder='Today I feel...') }}<br>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                 </div>
-            </form>
+    {% if form %} <!-- adding a conditional to check if the form exists and needs to be rendered (for example, it does not for the 'explore' page) -->
+    	<div class="row align-items-left justify-content-left">
+            <div class="col-md-4">
+                <h1 class='text-left'>Hey {{ current_user.username }}!</h1>
+                <form  action="" method="post" role="form">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                    {{ form.post.label }}<br>
+                    {{ form.post(class='form-control', cols=32, rows=4, placeholder='Today I feel...') }}<br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                     </div>
+                </form>
+            </div>
         </div>
-    </div>
-	<br>
-	{% endif %}
+    	<br>
+    {% endif %}
 
 	{% for post in posts %}
 		{% include '_post.html' %}
@@ -28,6 +28,7 @@
       <ul class="pagination">
         <li class="page-item previous{% if not prev_url %} disabled{% endif %}">
           <a class="page-link" href="{{ prev_url or '#' }}">&laquo; Newer posts</a>
+        </li>
 
         <li class="page-item next{% if not next_url %} disabled{% endif %}">
           <a class="page-link" href="{{ next_url or '#' }}">Older Posts &raquo;</a>
