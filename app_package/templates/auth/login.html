@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block app_content %}
-    <h1 class="text-center">Sign In</h1>
+    <h1 class="text-center">Sign in</h1>
         <div class="row align-items-center justify-content-center">
             <div class="col-md-4">
                 <form  action="" method="post" role="form">
@@ -29,8 +29,8 @@
         </div>
     <br>
 
-    <p class="text-center">New User? <a href="{{ url_for('auth.register') }}">Register here.</a></p>
+    <p class="text-center"><strong>New User? <a href="{{ url_for('auth.register') }}">Register here.</a></strong></p>
 
-    <p class="text-center">Forgot Your Password? <a href="{{ url_for('auth.reset_password_request') }}">Reset it.</a></p>
+    <p class="text-center"><strong>Forgot Your Password? <a href="{{ url_for('auth.reset_password_request') }}">Reset it.</a></strong></p>
     
 {% endblock %}

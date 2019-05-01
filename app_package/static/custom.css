@@ -1,18 +1,30 @@
+
 body {
     margin: 0;
     font-family: 'Lucida console', 'Calibri body', arial;
     font-size: 0.9375rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #aaa;
+    color: #262525;
     text-align: left;
-    /*background-color: #272B30;*/
-    background-image: url('flowers.jpg');
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  opacity: 0.35; 
+  background-image: url('flowers.jpg');
 }
 
 h1 {
 	margin-top: 1rem;
-	color: #272B30;
+	color: #262525;
+	font-size: 5rem;
 	font-variant: small-caps;
 }
 
@@ -30,6 +42,8 @@ h1 {
 	border: 1px solid transparent;
   	border-radius: 0.25rem;
 	margin-top: 1rem;
+	width: 60%;
+	margin: 1rem auto;
 }
 
 .alert-dismissible {
@@ -37,9 +51,9 @@ h1 {
 }
 
 .alert-warning{
-   color: #332d2c;
-   background-color: #ed7e68;
-   border-color: #fde1b9;
+   color: white;
+   background-color: #e83a51;
+   border-color: white;
 }
 
 .alert-danger {
@@ -116,4 +130,9 @@ h1 {
 .table {
 	width: 70%;
 	margin: 10px auto;
+}
+
+.row {
+	width: 70%;
+	margin: 1px auto;
 }

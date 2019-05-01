@@ -4,9 +4,9 @@
 {% block app_content %}   
 
     {% if form %} <!-- adding a conditional to check if the form exists and needs to be rendered (for example, it does not for the 'explore' page) -->
-    	<div class="row align-items-left justify-content-left">
-            <div class="col-md-4">
-                <h1 class='text-left'>Hey {{ current_user.username }}!</h1>
+    	<h1 class='text-center'>Hey {{ current_user.username }}!</h1>
+        <div class="row">
+            <div class="col-md-6">
                 <form  action="" method="post" role="form">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
