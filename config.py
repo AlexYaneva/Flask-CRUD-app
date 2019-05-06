@@ -12,7 +12,7 @@ class Config():
 	# This config varible provides the location of the app's database
 	SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db') 
 
-	# This signals the app everytime a change is made in the database, do not need it atm
+	# This signals the app everytime a change is made in the database, not needed at the moment
 	SQLALCHEMY_TRACK_MODIFICATIONS = False 
 
 	MAIL_SERVER = os.environ.get('MAIL_SERVER')
@@ -23,6 +23,7 @@ class Config():
 	
 	MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
 	MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-	ADMINS = ['sasha.raecontacts@yahoo.co.uk']
+	
+	ADMINS = os.environ.get('ADMINS')
 	POSTS_PER_PAGE = 3
 	
